@@ -20,6 +20,10 @@ public class AccountPOEPart1 {
     }
     
     // username check
+    public boolen checkUsername(){
+        return username.contains("-") && username.length() <= 5;
+    }
+    
 
     /**
      * @param args the command line arguments
