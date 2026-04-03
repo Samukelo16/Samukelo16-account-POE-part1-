@@ -18,6 +18,8 @@ public class AccountPOEPart1 {
         this.password = password;
         this.phoneNumber = phoneNumber;
     }
+    
+    // username check
 
     /**
      * @param args the command line arguments
