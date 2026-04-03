@@ -24,6 +24,26 @@ public class AccountPOEPart1 {
         return username.contains("-") && username.length() <= 5;
     }
     
+    // Password check
+    public boolean checkPassword() {
+        boolean hasCapital = false;
+        boolean hasNumber = false;
+        boolean hasSpecial = false;
+
+        if (password.length() >= 8) {
+            for (char c : password.toCharArray()) {
+                if (Character.isUpperCase(c)) {
+                    hasCapital = true;
+                } else if (Character.isDigit(c)) {
+                    hasNumber = true;
+                } else if (!Character.isLetterOrDigit(c)) {
+                    hasSpecial = true;
+                }
+            }
+        }
+
+        return hasCapital && hasNumber && hasSpecial;
+    }
 
     /**
      * @param args the command line arguments
