@@ -4,26 +4,25 @@
  */
 package account.poe.part1;
 
-/**
- *
- * @author Student
- */
+import java.util.Scanner;
+
 public class AccountPOEPart1 {
+
     private String username;
     private String password;
     private String phoneNumber;
-    
-    public Login(String username, String password, String phoneNumber){
+
+    public AccountPOEPart1(String username, String password, String phoneNumber){
         this.username = username;
         this.password = password;
         this.phoneNumber = phoneNumber;
     }
-    
+
     // username check
-    public boolen checkUsername(){
-        return username.contains("-") && username.length() <= 5;
+    public boolean checkUsername(){
+        return username.contains("_") && username.length() <= 5;
     }
-    
+
     // Password check
     public boolean checkPassword() {
         boolean hasCapital = false;
@@ -44,7 +43,7 @@ public class AccountPOEPart1 {
 
         return hasCapital && hasNumber && hasSpecial;
     }
-    
+
     // SA Phone Validation
     public boolean checkPhoneNumber() {
         return phoneNumber.matches("^\\+27\\d{9}$");
@@ -67,14 +66,24 @@ public class AccountPOEPart1 {
 
         return "Username and password successfully captured.";
     }
-}
-    /**
-     * @param args the command line arguments
-     */
+
+    // ✅ MAIN METHOD (put it inside the same class)
     public static void main(String[] args) {
-         
-        
-        // TODO code application logic here
+
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Enter username: ");
+        String username = input.nextLine();
+
+        System.out.print("Enter password: ");
+        String password = input.nextLine();
+
+        System.out.print("Enter phone number: ");
+        String phone = input.nextLine();
+
+        // ✅ create object of SAME class
+        AccountPOEPart1 user = new AccountPOEPart1(username, password, phone);
+
+        System.out.println(user.registerUser());
     }
-    
 }
