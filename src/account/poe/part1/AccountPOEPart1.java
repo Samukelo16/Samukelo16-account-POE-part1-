@@ -50,6 +50,24 @@ public class AccountPOEPart1 {
         return phoneNumber.matches("^\\+27\\d{9}$");
     }
 
+    // Registration message
+    public String registerUser() {
+
+        if (!checkUsername()) {
+            return "Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.";
+        }
+
+        if (!checkPassword()) {
+            return "Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.";
+        }
+
+        if (!checkPhoneNumber()) {
+            return "Cell phone number is incorrectly formatted or does not contain international code.";
+        }
+
+        return "Username and password successfully captured.";
+    }
+}
     /**
      * @param args the command line arguments
      */
