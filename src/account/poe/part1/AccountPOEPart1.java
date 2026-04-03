@@ -44,6 +44,11 @@ public class AccountPOEPart1 {
 
         return hasCapital && hasNumber && hasSpecial;
     }
+    
+    // SA Phone Validation
+    public boolean checkPhoneNumber() {
+        return phoneNumber.matches("^\\+27\\d{9}$");
+    }
 
     /**
      * @param args the command line arguments
