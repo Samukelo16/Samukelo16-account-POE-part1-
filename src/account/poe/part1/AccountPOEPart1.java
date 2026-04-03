@@ -44,10 +44,10 @@ public class AccountPOEPart1 {
         return hasCapital && hasNumber && hasSpecial;
     }
 
-    // SA Phone Validation
+    // International phone validation
     public boolean checkPhoneNumber() {
-        return phoneNumber.matches("^\\+27\\d{9}$");
-    }
+    return phoneNumber.matches("^\\+\\d{1,3}\\d{1,10}$");
+}
 
     // Registration message
     public String registerUser() {
@@ -60,14 +60,14 @@ public class AccountPOEPart1 {
             return "Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.";
         }
 
-        if (!checkPhoneNumber()) {
-            return "Cell phone number is incorrectly formatted or does not contain international code.";
-        }
+       if (!checkPhoneNumber()) {
+    return "Cell phone number is incorrectly formatted or does not contain international code.";
+}
 
         return "Username and password successfully captured.";
     }
 
-    // ✅ MAIN METHOD (put it inside the same class)
+    
     public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
