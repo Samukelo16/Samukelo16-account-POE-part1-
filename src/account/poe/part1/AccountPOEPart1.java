@@ -6,7 +6,7 @@ package account.poe.part1;
 
 import java.util.Scanner;
 
-public class  AccountPOEPart1 {
+public class AccountPOEPart1 {
 
     static Scanner input = new Scanner(System.in);
 
@@ -33,10 +33,16 @@ public class  AccountPOEPart1 {
 
         registerUser();
 
-        if (loginUser()) {
-            System.out.println("Login successful");
+        boolean loginStatus = loginUser();
+
+        // ✅ REQUIRED OUTPUT FORMAT
+        if (loginStatus) {
+            System.out.println("Login Successful");
+            System.out.println("The system returns: True");
             chatMenu();
         } else {
+            System.out.println("Login Failed");
+            System.out.println("The system returns: False");
             System.out.println("Too many failed attempts. Account is locked");
         }
     }
@@ -44,41 +50,61 @@ public class  AccountPOEPart1 {
     // ================= REGISTER USER =================
     static void registerUser() {
 
-        System.out.print("Enter username: ");
-        String username = input.nextLine();
+        // USERNAME LOOP
+        while (true) {
+            System.out.print("Enter username: ");
+            String username = input.nextLine();
 
-        if (checkUsername(username)) {
-            System.out.println("Username successfully captured.");
-            storedUsername = username;
-        } else {
-            System.out.println("Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.");
-            return;
+            if (checkUsername(username)) {
+                System.out.println("Username successfully captured.");
+                System.out.println("The system returns: True");
+                storedUsername = username;
+                break;
+            } else {
+                System.out.println("Username incorrectly formatted");
+                System.out.println("The system returns: False");
+            }
         }
 
-        System.out.print("Enter password: ");
-        String password = input.nextLine();
+        // PASSWORD LOOP
+        while (true) {
+            System.out.print("Enter password: ");
+            String password = input.nextLine();
 
-        if (checkPassword(password)) {
-            System.out.println("Password successfully captured.");
-            storedPassword = password;
-        } else {
-            System.out.println("Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.");
-            return;
+            if (checkPassword(password)) {
+                System.out.println("Password meets complexity requirements.");
+                System.out.println("The system returns: True");
+                storedPassword = password;
+                break;
+            } else {
+                System.out.println("Password does not meet complexity");
+                System.out.println("The system returns: False");
+            }
         }
 
-        System.out.print("Enter phone number: ");
-        String phone = input.nextLine();
+        // PHONE LOOP
+        while (true) {
+            System.out.print("Enter phone number: ");
+            String phone = input.nextLine();
 
-        if (checkPhoneNumber(phone)) {
-            System.out.println("Cell number successfully captured.");
-            storedPhone = phone;
-        } else {
-            System.out.println("Cell number is incorrectly formatted or does not contain an international code; please correct the number and try again.");
+            if (checkPhoneNumber(phone)) {
+                System.out.println("Cell number successfully captured.");
+                storedPhone = phone;
+                break;
+            } else {
+                System.out.println("Invalid phone number. Use international format (e.g. +2783...)");
+            }
         }
     }
 
     // ================= LOGIN =================
     static boolean loginUser() {
+
+        // ✅ Prevent crash if not registered
+        if (storedUsername == null || storedPassword == null) {
+            System.out.println("No user registered.");
+            return false;
+        }
 
         int attempts = 0;
 
@@ -90,7 +116,8 @@ public class  AccountPOEPart1 {
             System.out.print("Enter password: ");
             String password = input.nextLine();
 
-            if (storedUsername.equals(username) && storedPassword.equals(password)) {
+            // ✅ SAFE comparison
+            if (username.equals(storedUsername) && password.equals(storedPassword)) {
                 return true;
             } else {
                 attempts++;
@@ -107,9 +134,10 @@ public class  AccountPOEPart1 {
         int option;
 
         do {
-            System.out.println("\n-----CHAT MENU-----");
-            System.out.println("Send Message");
-            System.out.println("View Message");
+            System.out.println("\n----- CHAT MENU -----");
+            System.out.println("1. Send Message");
+            System.out.println("2. View Message");
+            System.out.println("0. Exit");
             System.out.print("Menu option: ");
 
             option = input.nextInt();
@@ -123,6 +151,10 @@ public class  AccountPOEPart1 {
 
                 case 2:
                     viewMessage();
+                    break;
+
+                case 0:
+                    System.out.println("Exiting chat...");
                     break;
 
                 default:
